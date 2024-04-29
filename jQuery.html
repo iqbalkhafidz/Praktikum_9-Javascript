@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contoh Validasi Formulir dengan jQuery</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+<form id="formulir">
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama">
+    <span id="error-nama" class="error"></span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+    <span id="error-email" class="error"></span><br><br>
+
+    <input type="submit" value="Kirim">
+</form>
+
+<script>
+$(document).ready(function(){
+    $("#formulir").submit(function(event){
+        event.preventDefault();
+
+        var nama = $("#nama").val();
+        var email = $("#email").val();
+
+        if(nama == "") {
+            $("#error-nama").text("Nama harus diisi");
+        } else {
+            $("#error-nama").text("");
+        }
+
+        if(email == "") {
+            $("#error-email").text("Email harus diisi");
+        } else if (!isValidEmail(email)) {
+            $("#error-email").text("Format email tidak valid");
+        } else {
+            $("#error-email").text("");
+        }
+    });
+});
+
+function isValidEmail(email) {
+    var regex = /\S+@\S+\.\S+/;
+    return regex.test(email);
+}
+</script>
+
+</body>
+</html>

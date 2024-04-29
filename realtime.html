@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jam dan Tanggal Real-time</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .jam-tanggal {
+        text-align: center;
+    }
+
+    .waktu {
+        font-size: 3em;
+        margin-bottom: 10px;
+    }
+
+    .tanggal {
+        font-size: 1.5em;
+        color: #777;
+    }
+</style>
+</head>
+<body>
+<div class="jam-tanggal">
+    <div class="waktu" id="waktu"></div>
+    <div class="tanggal" id="tanggal"></div>
+</div>
+<script>
+    function perbaruiWaktu() {
+        const sekarang = new Date();
+        const elemenWaktu = document.getElementById('waktu');
+        const elemenTanggal = document.getElementById('tanggal');
+
+        const opsi = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const waktuString = sekarang.toLocaleTimeString('id-ID', opsi);
+        elemenWaktu.textContent = waktuString;
+
+        const tanggalString = sekarang.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        elemenTanggal.textContent = tanggalString;
+    }
+
+    setInterval(perbaruiWaktu, 1000);
+    perbaruiWaktu();
+</script>
+</body>
+</html>
